@@ -90,6 +90,12 @@ quasar dev
 
 **Request address configuration**: `templates/public/statics/baseurl.txt`
 
+### Render deployment (Supabase)
+
+See [Render deployment instructions](README.md#render-deployment-supabase)
+for build/start commands, private environment variables, health checks,
+frontend updates, and free-tier storage behavior.
+
 ### Tech Stack
 
 - **Backend**: Python 3.8+ / Django 3.1+ / Django REST Framework

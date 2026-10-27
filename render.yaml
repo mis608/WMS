@@ -1,0 +1,33 @@
+services:
+  - type: web
+    name: greaterwms
+    runtime: python
+    plan: free
+    region: singapore
+    branch: master
+    buildCommand: bash render-build.sh
+    startCommand: bash render-start.sh
+    healthCheckPath: /health/
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.10.19
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: "False"
+      - key: ALLOWED_HOSTS
+        value: localhost,127.0.0.1
+      - key: DB_ENGINE
+        value: django.db.backends.postgresql
+      - key: DB_NAME
+        value: postgres
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
+      - key: DB_HOST
+        sync: false
+      - key: DB_PORT
+        value: "5432"

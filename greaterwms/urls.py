@@ -13,6 +13,8 @@ def return_static(request, path, insecure=True, **kwargs):
 
 
 urlpatterns = [
+    path('health/', views.health, name='health'),
+    path('statics/baseurl.txt', views.baseurl, name='baseurl'),
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name='dist/spa/index.html')),
     path('myip/', views.myip, name='myip'),

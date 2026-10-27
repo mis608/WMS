@@ -1,8 +1,24 @@
-from django.http import StreamingHttpResponse, JsonResponse
+from django.http import StreamingHttpResponse, JsonResponse, HttpResponse
+from django.db import connection, DatabaseError
 from django.conf import settings
 from wsgiref.util import FileWrapper
 from rest_framework.exceptions import APIException
 import mimetypes, os
+
+def health(request):
+    try:
+        with connection.cursor() as cursor:
+            cursor.execute('SELECT 1')
+    except DatabaseError:
+        return JsonResponse({'status': 'unavailable'}, status=503)
+    return JsonResponse({'status': 'ok'})
+
+
+def baseurl(request):
+    response = HttpResponse(request.build_absolute_uri('/').rstrip('/'), content_type='text/plain')
+    response['Cache-Control'] = 'no-store'
+    return response
+
 
 def robots(request):
     path = settings.BASE_DIR + request.path_info
