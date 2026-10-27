@@ -12,3 +12,5 @@ bfg.jar
 error.log
 server.log
 /.history/
+.env
+supabase/.temp/
